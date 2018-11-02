@@ -14,10 +14,15 @@ public class ProgramController {
     public ProgramController(ProgramView programView, ProgramModel programModel) {
         this.programView = programView;
         this.programModel = programModel;
-
+        this.programView.setProgramSizes(this.programModel.frameWidth, this.programModel.frameHeight,
+                                         this.programModel.controllerPanelWidth, this.programModel.controllerPanelHeight,
+                                         this.programModel.controllerPaneleMinWidth, this.programModel.controllerPanelMinHeight,
+                                         this.programModel.drawingMinWidth, this.programModel.drawingMinHeight,
+                                         this.programModel.splitDividerLocation);
         this.loadImage(DEFAULT_PICTURE);
 
         programView.controllerPanel.addChangeImageListener(new ChangeImageListener());
+        programView.controllerPanel.addDrawSquareListener(new DrawSquare());
     }
 
     class ChangeImageListener implements ActionListener {
@@ -37,6 +42,14 @@ public class ProgramController {
 //                System.exit(1);
             }
 
+        }
+    }
+
+    class DrawSquare implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("elo");
         }
     }
 

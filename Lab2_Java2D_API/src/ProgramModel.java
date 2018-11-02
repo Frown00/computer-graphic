@@ -1,20 +1,23 @@
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class ProgramModel {
-    private final int frameWidth = 16 * 60;
-    private final int frameHeight = 9 * 60;
+    final int frameWidth = 16 * 60;
+    final int frameHeight = 9 * 60;
 
     private int drawingWidth;
     private int drawingHeight;
-    private final int interfaceWidth = 150;
-    private final int interfaceHeight = 300;
+    final int controllerPanelWidth = 150;
+    final int controllerPanelHeight = 300;
 
-    private final int drawingMinWidth = 300;
-    private final int drawingMinHeight = 300;
-    private final int interfaceMinWidth = 150;
-    private final int interfaceMinHeight = 300;
-    private final int splitDividerLocation = 200;
+    final int drawingMinWidth = 300;
+    final int drawingMinHeight = 300;
+    final int controllerPaneleMinWidth = 150;
+    final int controllerPanelMinHeight = 300;
+    final int splitDividerLocation = 200;
+
     public BufferedImage image;
+    private ArrayList<ColoredShape> coloredShapes = new ArrayList<>();
 
 
     public ProgramModel() {

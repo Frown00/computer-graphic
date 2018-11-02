@@ -5,15 +5,13 @@ import java.io.File;
 
 public class ControllerPanel extends JPanel {
     JButton loadImageBtn;
-    JButton squareShape;
+    JButton drawSquareBtn;
 
     ControllerPanel() {
         loadImageBtn = new JButton("Wczytaj obraz");
-        squareShape = new JButton("Kwadrat");
+        drawSquareBtn = new JButton("Kwadrat");
         add(loadImageBtn);
-        add(squareShape);
-
-
+        add(drawSquareBtn);
 
     }
 
@@ -25,5 +23,8 @@ public class ControllerPanel extends JPanel {
         loadImageBtn.addActionListener(listenChange);
     }
 
+    void addDrawSquareListener( ActionListener listenDrawSquare) {
+        drawSquareBtn.addActionListener(listenDrawSquare);
+    }
 
 }

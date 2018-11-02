@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -6,40 +7,27 @@ public class ProgramView extends JFrame {
     DrawingPanel drawingPanel = new DrawingPanel();
     JPanel drawingContainer = new JPanel();
     JScrollPane drawingScrollPane = new JScrollPane(drawingContainer);
-    JSplitPane splitPane;
     ControllerPanel controllerPanel = new ControllerPanel();
     JScrollPane controllerScrollPane = new JScrollPane(controllerPanel);
-
+    JSplitPane splitPane;
     //private JSplitPane splitPane = new JSplitPane();
     ProgramView() {
-        JPanel program = new JPanel();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTitle("Mark and save");
-
-//        drawingPanel.setPreferredSize(new Dimension(300, 300));
 
         drawingContainer.setLayout(new GridBagLayout());
         drawingContainer.add(drawingPanel, new GridBagConstraints());
 
-        drawingScrollPane.setMinimumSize(new Dimension(30, 30));
-
-
-        // Controller panel basic config
-        controllerPanel.setPreferredSize(new Dimension(200, 300));
-
-        controllerScrollPane.setMinimumSize(new Dimension(150, 300));
-
         // Put drawing and interface together
-        JSplitPane splitPane = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT,
+        splitPane = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT,
                 controllerScrollPane,
                 drawingScrollPane);
         splitPane.setOneTouchExpandable(true);
-        splitPane.setDividerLocation(200);
 
         this.getContentPane().add(splitPane);
+
         this.pack();
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 
@@ -49,7 +37,23 @@ public class ProgramView extends JFrame {
         drawingPanel.repaint();
     }
 
+    public void setProgramSizes(int frameWidth, int frameHeight,
+                                int controllerPanelWidth, int controllerPanelHeight,
+                                int controllerPanelMinWidth, int controllerPanelMinHeight,
+                                int drawingMinWidth, int drawingMinHeight,
+                                int splitDividerLocation)
+    {
+        // Size when "restore down" ( box icon clicked )
+        this.setSize(frameWidth, frameHeight);
 
+        drawingScrollPane.setMinimumSize(new Dimension(drawingMinWidth, drawingMinHeight));
+        controllerPanel.setPreferredSize(new Dimension(controllerPanelWidth, controllerPanelHeight));
+        controllerScrollPane.setMinimumSize(new Dimension(controllerPanelMinWidth, controllerPanelMinHeight));
+        splitPane.setDividerLocation(splitDividerLocation);
+
+        // Fullscreen mode with top label
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    }
 
     void addChangeImageListener(ActionListener listenerForChange) {
 
