@@ -1,14 +1,23 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 
 public class DrawingPanel extends JPanel {
     BufferedImage image;
+    Line2D drawingLine;
+    Shape shape;
+    Color shapeColor;
+    int selectedTypeOfShape;
 
-
+    ArrayList<ColoredShape> rectangles = new ArrayList<>();
     DrawingPanel() {
         image = null;
     }
@@ -44,10 +53,51 @@ public class DrawingPanel extends JPanel {
 //                image.setRGB(j, i, color);
 //            }
 //        }
+        for (ColoredShape cr : rectangles)
+        {
+            g2d.setColor( cr.getStrokeColor() );
+            g2d.setStroke(new BasicStroke(cr.getStrokeSize()));
+            g2d.draw(cr.getShape());
+
+        }
+
+        if (shape != null)
+        {
+            g2d.setColor( shapeColor);
+            g2d.setStroke(new BasicStroke(3));
+            if(shape instanceof DrawingPolygon) {
+                if(drawingLine != null)
+                    g2d.draw(drawingLine);
+
+                ArrayList<Line2D> lines = ((DrawingPolygon) shape).getLines();
+                for (Line2D line : lines) {
+                    g2d.draw(line);
+                }
+            } else {
+                g2d.draw( shape );
+            }
+        }
+
+
 
     }
 
+    public void setDrawingShape(Rectangle2D.Double shape) {
+        this.shape = shape;
+    }
 
+    public void setListShapes(ArrayList<ColoredShape> shapes) {
+        this.rectangles = shapes;
+    }
+
+    public void setImage(BufferedImage img) {
+        this.image = img;
+    }
+
+    public void addListenMouse(MouseInputAdapter listenMouse) {
+        addMouseListener(listenMouse);
+        addMouseMotionListener(listenMouse);
+    }
 
     static int int2RGB( int red, int green, int blue) {
         // Make sure that color intensities are in 0..255 range

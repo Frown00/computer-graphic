@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -7,22 +8,31 @@ public class ProgramModel {
 
     private int drawingWidth;
     private int drawingHeight;
-    final int controllerPanelWidth = 150;
-    final int controllerPanelHeight = 300;
+    final int controllerPanelWidth = 200;
+    final int controllerPanelHeight = 800;
 
     final int drawingMinWidth = 300;
     final int drawingMinHeight = 300;
-    final int controllerPaneleMinWidth = 150;
-    final int controllerPanelMinHeight = 300;
+    final int controllerPanelMinWidth = 150;
+    final int controllerPanelMinHeight = 700;
     final int splitDividerLocation = 200;
+    final static int RECTANGLE_SHAPE = 1;
+    final static int ELLIPSE_SHAPE = 2;
+    final static int POLYGON_SHAPE = 3;
+
+    boolean isDrawing = false;
 
     public BufferedImage image;
-    private ArrayList<ColoredShape> coloredShapes = new ArrayList<>();
+    ArrayList<ColoredShape> coloredShapes = new ArrayList<>();
 
+    public ColoredShape shape;
+    public Color shapeColor;
+    public String selectedTypeOfShape;
 
     public ProgramModel() {
         drawingWidth = 500;
         drawingHeight = 500;
+        shapeColor = Color.BLACK;
     }
 
 

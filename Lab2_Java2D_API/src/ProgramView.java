@@ -24,7 +24,6 @@ public class ProgramView extends JFrame {
         splitPane.setOneTouchExpandable(true);
 
         this.getContentPane().add(splitPane);
-
         this.pack();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,7 +54,5 @@ public class ProgramView extends JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
-    void addChangeImageListener(ActionListener listenerForChange) {
 
-    }
 }
